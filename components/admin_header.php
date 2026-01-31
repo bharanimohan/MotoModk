@@ -33,9 +33,14 @@
 
       <div class="profile">
          <?php
+            if(isset($admin_id) && is_numeric($admin_id)){
             $select_profile = $conn->prepare("SELECT * FROM admins WHERE id = ?");
             $select_profile->execute([$admin_id]);
+            if($select_profile->rowCount() > 0){
             $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
+            $profile_name = $fetch_profile['name'];
+            }
+            }
          ?>
          <p><?= $fetch_profile['name']; ?></p>
          <a href="../admin/update_profile.php" class="btn">update profile</a>

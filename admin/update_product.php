@@ -107,9 +107,14 @@ if(isset($_POST['update'])){
    <h1 class="heading">update product</h1>
 
    <?php
+      if(isset($_GET['update']) && is_numeric($_GET['update'])){
       $update_id = $_GET['update'];
       $select_products = $conn->prepare("SELECT * FROM products WHERE id = ?");
       $select_products->execute([$update_id]);
+      }
+      else{
+         $select_products = null;
+      }
       if($select_products->rowCount() > 0){
          while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){ 
    ?>

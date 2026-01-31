@@ -27,18 +27,18 @@
 
       <div class="icons">
          <?php
-            if($user_id != ''){
+            $total_wishlist_counts = 0;
+            $total_cart_counts = 0;
+            
+            if(isset($user_id) && is_numeric($user_id)){
             $count_wishlist_items = $conn->prepare("SELECT * FROM wishlist WHERE user_id = ?");
             $count_wishlist_items->execute([$user_id]);
             $total_wishlist_counts = $count_wishlist_items->rowCount();
-            }
-            else{
-               $total_wishlist_counts = 0;
-            }
 
             $count_cart_items = $conn->prepare("SELECT * FROM cart WHERE user_id = ?");
             $count_cart_items->execute([$user_id]);
             $total_cart_counts = $count_cart_items->rowCount();
+            }
          ?>
          <div id="menu-btn" class="fas fa-bars"></div>
          <a href="search_page.php"><i class="fas fa-search"></i></a>
@@ -48,11 +48,18 @@
       </div>
 
       <div class="profile">
-         <?php          
+         <?php
+            $profile_found = false;
+
+            if(isset($user_id) && is_numeric($user_id)){            
             $select_profile = $conn->prepare("SELECT * FROM users WHERE id = ?");
             $select_profile->execute([$user_id]);
             if($select_profile->rowCount() > 0){
             $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
+            $profile_found = true;
+            }
+            }
+            if($profile_found){
          ?>
          <p><?= $fetch_profile["name"]; ?></p>
          <a href="update_user.php" class="btn">update profile</a>
