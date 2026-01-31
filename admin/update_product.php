@@ -19,7 +19,7 @@ if(isset($_POST['update'])){
    $price = filter_var($price, FILTER_SANITIZE_SPECIAL_CHARS);
    $details = $_POST['details'];
    $details = filter_var($details, FILTER_SANITIZE_SPECIAL_CHARS);
-   $update_product = $conn->prepare("UPDATE `products` SET name = ?, price = ?, details = ? WHERE id = ?");
+   $update_product = $conn->prepare("UPDATE products SET name = ?, price = ?, details = ? WHERE id = ?");
    $update_product->execute([$name, $price, $details, $pid]);
 
    $message[] = 'product updated successfully!';
@@ -35,7 +35,7 @@ if(isset($_POST['update'])){
       if($image_size_01 > 2000000){
          $message[] = 'image size is too large!';
       }else{
-         $update_image_01 = $conn->prepare("UPDATE `products` SET image_01 = ? WHERE id = ?");
+         $update_image_01 = $conn->prepare("UPDATE products SET image_01 = ? WHERE id = ?");
          $update_image_01->execute([$image_01, $pid]);
          move_uploaded_file($image_tmp_name_01, $image_folder_01);
          unlink('../uploaded_img/'.$old_image_01);
@@ -54,7 +54,7 @@ if(isset($_POST['update'])){
       if($image_size_02 > 2000000){
          $message[] = 'image size is too large!';
       }else{
-         $update_image_02 = $conn->prepare("UPDATE `products` SET image_02 = ? WHERE id = ?");
+         $update_image_02 = $conn->prepare("UPDATE products SET image_02 = ? WHERE id = ?");
          $update_image_02->execute([$image_02, $pid]);
          move_uploaded_file($image_tmp_name_02, $image_folder_02);
          unlink('../uploaded_img/'.$old_image_02);
@@ -73,7 +73,7 @@ if(isset($_POST['update'])){
       if($image_size_03 > 2000000){
          $message[] = 'image size is too large!';
       }else{
-         $update_image_03 = $conn->prepare("UPDATE `products` SET image_03 = ? WHERE id = ?");
+         $update_image_03 = $conn->prepare("UPDATE products SET image_03 = ? WHERE id = ?");
          $update_image_03->execute([$image_03, $pid]);
          move_uploaded_file($image_tmp_name_03, $image_folder_03);
          unlink('../uploaded_img/'.$old_image_03);
@@ -108,7 +108,7 @@ if(isset($_POST['update'])){
 
    <?php
       $update_id = $_GET['update'];
-      $select_products = $conn->prepare("SELECT * FROM `products` WHERE id = ?");
+      $select_products = $conn->prepare("SELECT * FROM products WHERE id = ?");
       $select_products->execute([$update_id]);
       if($select_products->rowCount() > 0){
          while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){ 

@@ -14,7 +14,7 @@ if(!isset($admin_id)){
 
 if(isset($_GET['delete'])){
    $delete_id = $_GET['delete'];
-   $delete_message = $conn->prepare("DELETE FROM `messages` WHERE id = ?");
+   $delete_message = $conn->prepare("DELETE FROM messages WHERE id = ?");
    $delete_message->execute([$delete_id]);
    header('location:messages.php');
 }
@@ -45,7 +45,7 @@ if(isset($_GET['delete'])){
 <div class="box-container">
 
    <?php
-      $select_messages = $conn->prepare("SELECT * FROM `messages`");
+      $select_messages = $conn->prepare("SELECT * FROM messages");
       $select_messages->execute();
       if($select_messages->rowCount() > 0){
          while($fetch_message = $select_messages->fetch(PDO::FETCH_ASSOC)){

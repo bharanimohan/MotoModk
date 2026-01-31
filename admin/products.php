@@ -37,14 +37,14 @@ if(isset($_POST['add_product'])){
    $image_tmp_name_03 = $_FILES['image_03']['tmp_name'];
    $image_folder_03 = '../uploaded_img/'.$image_03;
 
-   $select_products = $conn->prepare("SELECT * FROM `products` WHERE name = ?");
+   $select_products = $conn->prepare("SELECT * FROM products WHERE name = ?");
    $select_products->execute([$name]);
 
    if($select_products->rowCount() > 0){
       $message[] = 'product name already exist!';
    }else{
 
-      $insert_products = $conn->prepare("INSERT INTO `products`(name, details, price, image_01, image_02, image_03) VALUES(?,?,?,?,?,?)");
+      $insert_products = $conn->prepare("INSERT INTO products(name, details, price, image_01, image_02, image_03) VALUES(?,?,?,?,?,?)");
       $insert_products->execute([$name, $details, $price, $image_01, $image_02, $image_03]);
 
       if($insert_products){
@@ -66,17 +66,17 @@ if(isset($_POST['add_product'])){
 if(isset($_GET['delete'])){
 
    $delete_id = $_GET['delete'];
-   $delete_product_image = $conn->prepare("SELECT * FROM `products` WHERE id = ?");
+   $delete_product_image = $conn->prepare("SELECT * FROM products WHERE id = ?");
    $delete_product_image->execute([$delete_id]);
    $fetch_delete_image = $delete_product_image->fetch(PDO::FETCH_ASSOC);
    unlink('../uploaded_img/'.$fetch_delete_image['image_01']);
    unlink('../uploaded_img/'.$fetch_delete_image['image_02']);
    unlink('../uploaded_img/'.$fetch_delete_image['image_03']);
-   $delete_product = $conn->prepare("DELETE FROM `products` WHERE id = ?");
+   $delete_product = $conn->prepare("DELETE FROM products WHERE id = ?");
    $delete_product->execute([$delete_id]);
-   $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE pid = ?");
+   $delete_cart = $conn->prepare("DELETE FROM cart WHERE pid = ?");
    $delete_cart->execute([$delete_id]);
-   $delete_wishlist = $conn->prepare("DELETE FROM `wishlist` WHERE pid = ?");
+   $delete_wishlist = $conn->prepare("DELETE FROM wishlist WHERE pid = ?");
    $delete_wishlist->execute([$delete_id]);
    header('location:products.php');
 }
@@ -145,7 +145,7 @@ if(isset($_GET['delete'])){
    <div class="box-container">
 
    <?php
-      $select_products = $conn->prepare("SELECT * FROM `products`");
+      $select_products = $conn->prepare("SELECT * FROM products");
       $select_products->execute();
       if($select_products->rowCount() > 0){
          while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){ 

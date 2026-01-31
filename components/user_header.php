@@ -27,11 +27,11 @@
 
       <div class="icons">
          <?php
-            $count_wishlist_items = $conn->prepare("SELECT * FROM `wishlist` WHERE user_id = ?");
+            $count_wishlist_items = $conn->prepare("SELECT * FROM wishlist WHERE user_id = ?");
             $count_wishlist_items->execute([$user_id]);
             $total_wishlist_counts = $count_wishlist_items->rowCount();
 
-            $count_cart_items = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
+            $count_cart_items = $conn->prepare("SELECT * FROM cart WHERE user_id = ?");
             $count_cart_items->execute([$user_id]);
             $total_cart_counts = $count_cart_items->rowCount();
          ?>
@@ -44,7 +44,7 @@
 
       <div class="profile">
          <?php          
-            $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
+            $select_profile = $conn->prepare("SELECT * FROM users WHERE id = ?");
             $select_profile->execute([$user_id]);
             if($select_profile->rowCount() > 0){
             $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);

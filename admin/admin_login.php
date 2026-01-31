@@ -7,11 +7,11 @@ session_start();
 if(isset($_POST['submit'])){
 
    $name = $_POST['name'];
-   $name = filter_var($name, FILTER_SANITIZE_STRING);
+   $name = filter_var($name, FILTER_SANITIZE_SPECIAL_CHARS);
    $pass = sha1($_POST['pass']);
-   $pass = filter_var($pass, FILTER_SANITIZE_STRING);
+   $pass = filter_var($pass, FILTER_SANITIZE_SPECIAL_CHARS);
 
-   $select_admin = $conn->prepare("SELECT * FROM `admins` WHERE name = ? AND password = ?");
+   $select_admin = $conn->prepare("SELECT * FROM admins WHERE name = ? AND password = ?");
    $select_admin->execute([$name, $pass]);
    $row = $select_admin->fetch(PDO::FETCH_ASSOC);
 

@@ -12,7 +12,7 @@ if(!isset($admin_id)){
 
 if(isset($_GET['delete'])){
    $delete_id = $_GET['delete'];
-   $delete_admins = $conn->prepare("DELETE FROM `admins` WHERE id = ?");
+   $delete_admins = $conn->prepare("DELETE FROM admins WHERE id = ?");
    $delete_admins->execute([$delete_id]);
    header('location:admin_accounts.php');
 }
@@ -48,7 +48,7 @@ if(isset($_GET['delete'])){
    </div>
 
    <?php
-      $select_accounts = $conn->prepare("SELECT * FROM `admins`");
+      $select_accounts = $conn->prepare("SELECT * FROM admins");
       $select_accounts->execute();
       if($select_accounts->rowCount() > 0){
          while($fetch_accounts = $select_accounts->fetch(PDO::FETCH_ASSOC)){   

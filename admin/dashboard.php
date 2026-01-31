@@ -44,7 +44,7 @@ if(!isset($admin_id)){
       <div class="box">
          <?php
             $total_pendings = 0;
-            $select_pendings = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = ?");
+            $select_pendings = $conn->prepare("SELECT * FROM orders WHERE payment_status = ?");
             $select_pendings->execute(['pending']);
             if($select_pendings->rowCount() > 0){
                while($fetch_pendings = $select_pendings->fetch(PDO::FETCH_ASSOC)){
@@ -60,7 +60,7 @@ if(!isset($admin_id)){
       <div class="box">
          <?php
             $total_completes = 0;
-            $select_completes = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = ?");
+            $select_completes = $conn->prepare("SELECT * FROM orders WHERE payment_status = ?");
             $select_completes->execute(['completed']);
             if($select_completes->rowCount() > 0){
                while($fetch_completes = $select_completes->fetch(PDO::FETCH_ASSOC)){
@@ -75,7 +75,7 @@ if(!isset($admin_id)){
 
       <div class="box">
          <?php
-            $select_orders = $conn->prepare("SELECT * FROM `orders`");
+            $select_orders = $conn->prepare("SELECT * FROM orders");
             $select_orders->execute();
             $number_of_orders = $select_orders->rowCount()
          ?>
@@ -86,7 +86,7 @@ if(!isset($admin_id)){
 
       <div class="box">
          <?php
-            $select_products = $conn->prepare("SELECT * FROM `products`");
+            $select_products = $conn->prepare("SELECT * FROM products");
             $select_products->execute();
             $number_of_products = $select_products->rowCount()
          ?>
@@ -97,7 +97,7 @@ if(!isset($admin_id)){
 
       <div class="box">
          <?php
-            $select_users = $conn->prepare("SELECT * FROM `users`");
+            $select_users = $conn->prepare("SELECT * FROM users");
             $select_users->execute();
             $number_of_users = $select_users->rowCount()
          ?>
@@ -108,7 +108,7 @@ if(!isset($admin_id)){
 
       <div class="box">
          <?php
-            $select_admins = $conn->prepare("SELECT * FROM `admins`");
+            $select_admins = $conn->prepare("SELECT * FROM admins");
             $select_admins->execute();
             $number_of_admins = $select_admins->rowCount()
          ?>
@@ -119,7 +119,7 @@ if(!isset($admin_id)){
 
       <div class="box">
          <?php
-            $select_messages = $conn->prepare("SELECT * FROM `messages`");
+            $select_messages = $conn->prepare("SELECT * FROM messages");
             $select_messages->execute();
             $number_of_messages = $select_messages->rowCount()
          ?>

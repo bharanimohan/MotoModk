@@ -41,7 +41,7 @@ if(isset($_SESSION['user_id'])){
       if($user_id == ''){
          echo '<p class="empty">please login to see your orders</p>';
       }else{
-         $select_orders = $conn->prepare("SELECT * FROM `orders` WHERE user_id = ?");
+         $select_orders = $conn->prepare("SELECT * FROM orders WHERE user_id = ?");
          $select_orders->execute([$user_id]);
          if($select_orders->rowCount() > 0){
             while($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)){
