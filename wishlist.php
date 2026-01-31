@@ -9,14 +9,17 @@ if(isset($_SESSION['user_id'])){
 }else{
    $user_id = '';
    header('location:user_login.php');
+   exit();
 };
 
 include 'components/wishlist_cart.php';
 
 if(isset($_POST['delete'])){
    $wishlist_id = $_POST['wishlist_id'];
+   if(is_numeric($wishlist_id)){
    $delete_wishlist_item = $conn->prepare("DELETE FROM wishlist WHERE id = ?");
    $delete_wishlist_item->execute([$wishlist_id]);
+   }
 }
 
 if(isset($_GET['delete_all'])){

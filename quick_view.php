@@ -38,10 +38,15 @@ include 'components/wishlist_cart.php';
    <h1 class="heading">quick view</h1>
 
    <?php
+   if(isset($_GET['pid']) && is_numeric($_GET['pid'])){
      $pid = $_GET['pid'];
      $select_products = $conn->prepare("SELECT * FROM products WHERE id = ?"); 
      $select_products->execute([$pid]);
-     if($select_products->rowCount() > 0){
+   }
+   else{
+      $select_products = null;
+   }
+   if($select_products && $select_products->rowCount() > 0){
       while($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)){
    ?>
    <form action="" method="post" class="box">

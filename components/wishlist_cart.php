@@ -52,7 +52,7 @@ if(isset($_POST['add_to_cart'])){
       $qty = $_POST['qty'];
       $qty = filter_var($qty, FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $check_cart_numbers = $conn->prepare("SELECT * FROM `cart` WHERE name = ? AND user_id = ?");
+      $check_cart_numbers = $conn->prepare("SELECT * FROM cart WHERE name = ? AND user_id = ?");
       $check_cart_numbers->execute([$name, $user_id]);
 
       if($check_cart_numbers->rowCount() > 0){
