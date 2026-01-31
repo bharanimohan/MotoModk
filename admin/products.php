@@ -65,6 +65,7 @@ if(isset($_POST['add_product'])){
 
 if(isset($_GET['delete'])){
 
+   if(is_numeric($delete_id)){
    $delete_id = $_GET['delete'];
    $delete_product_image = $conn->prepare("SELECT * FROM products WHERE id = ?");
    $delete_product_image->execute([$delete_id]);
@@ -78,6 +79,7 @@ if(isset($_GET['delete'])){
    $delete_cart->execute([$delete_id]);
    $delete_wishlist = $conn->prepare("DELETE FROM wishlist WHERE pid = ?");
    $delete_wishlist->execute([$delete_id]);
+   }
    header('location:products.php');
 }
 

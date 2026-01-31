@@ -12,8 +12,10 @@ if(!isset($admin_id)){
 
 if(isset($_GET['delete'])){
    $delete_id = $_GET['delete'];
+   if(is_numeric($delete_id)){
    $delete_admins = $conn->prepare("DELETE FROM admins WHERE id = ?");
    $delete_admins->execute([$delete_id]);
+   }
    header('location:admin_accounts.php');
 }
 

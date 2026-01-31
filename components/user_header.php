@@ -27,9 +27,14 @@
 
       <div class="icons">
          <?php
+            if($user_id != ''){
             $count_wishlist_items = $conn->prepare("SELECT * FROM wishlist WHERE user_id = ?");
             $count_wishlist_items->execute([$user_id]);
             $total_wishlist_counts = $count_wishlist_items->rowCount();
+            }
+            else{
+               $total_wishlist_counts = 0;
+            }
 
             $count_cart_items = $conn->prepare("SELECT * FROM cart WHERE user_id = ?");
             $count_cart_items->execute([$user_id]);
