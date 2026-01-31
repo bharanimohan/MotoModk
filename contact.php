@@ -30,7 +30,7 @@ if(isset($_POST['send'])){
       $insert_user_id = ($user_id === '') ? null : $user_id;
 
       $insert_message = $conn->prepare("INSERT INTO messages(user_id, name, email, number, message) VALUES(?,?,?,?,?)");
-      $insert_message->execute([$user_id, $name, $email, $number, $msg]);
+      $insert_message->execute([$insert_user_id, $name, $email, $number, $msg]);
 
       $message[] = 'sent message successfully!';
 
